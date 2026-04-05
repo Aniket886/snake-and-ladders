@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake and Ladders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero-panel">
+      <p class="eyebrow">Browser Game</p>
+      <h1>Snake and Ladders</h1>
+      <p class="hero-copy">
+        Roll the dice, climb the ladders, avoid the snakes, and reach square 100 exactly.
+      </p>
+
+      <form id="setup-form" class="setup-card">
+        <label for="player-count">Players</label>
+        <select id="player-count" name="playerCount">
+          <option value="2">2 Players</option>
+          <option value="3">3 Players</option>
+          <option value="4">4 Players</option>
+        </select>
+        <button type="submit" class="primary-btn">Start New Game</button>
+      </form>
+
+      <section class="controls-card">
+        <div class="dice-panel">
+          <p class="panel-label">Dice</p>
+          <div id="dice-face" class="dice-face" aria-live="polite">-</div>
+          <button id="roll-btn" class="primary-btn" type="button" disabled>Roll Dice</button>
+        </div>
+
+        <div class="status-panel">
+          <p class="panel-label">Status</p>
+          <p id="turn-indicator" class="turn-indicator">Start a game to begin.</p>
+          <p id="result-text" class="result-text">Choose the number of players and press start.</p>
+          <button id="restart-btn" class="secondary-btn" type="button" disabled>Restart</button>
+        </div>
+      </section>
+
+      <section class="players-card">
+        <div class="card-heading-row">
+          <p class="panel-label">Players</p>
+          <p class="small-note">Shared device multiplayer</p>
+        </div>
+        <div id="players-list" class="players-list"></div>
+      </section>
+
+      <section class="log-card">
+        <div class="card-heading-row">
+          <p class="panel-label">Move Log</p>
+          <p class="small-note">Latest turn first</p>
+        </div>
+        <ol id="move-log" class="move-log" aria-live="polite"></ol>
+      </section>
+    </section>
+
+    <section class="board-panel">
+      <div class="board-frame">
+        <div class="board-header">
+          <p class="panel-label">Board</p>
+          <p class="small-note">Exact roll needed to finish</p>
+        </div>
+        <div id="board" class="board" aria-label="Snake and Ladders board"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
