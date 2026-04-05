@@ -24,7 +24,7 @@
         Roll the dice, climb the ladders, avoid the snakes, and reach square 100 exactly.
       </p>
 
-      <form id="setup-form" class="setup-card">
+      <form id="setup-form" class="setup-card" aria-label="Game setup">
         <label for="player-count">Players</label>
         <select id="player-count" name="playerCount">
           <option value="2">2 Players</option>
@@ -36,13 +36,14 @@
           id="player-names"
           name="playerNames"
           rows="3"
+          aria-describedby="player-names-help"
           placeholder="Enter names separated by commas, for example: Aniket, Priya, Rahul"
         ></textarea>
-        <p class="setup-help">Leave blank to use the default player names.</p>
+        <p id="player-names-help" class="setup-help">Leave blank to use the default player names.</p>
         <button type="submit" class="primary-btn">Start New Game</button>
       </form>
 
-      <section class="controls-card">
+      <section class="controls-card" aria-label="Game controls">
         <div class="dice-panel">
           <p class="panel-label">Dice</p>
           <div id="dice-face" class="dice-face" aria-live="polite">-</div>
@@ -51,21 +52,21 @@
 
         <div class="status-panel">
           <p class="panel-label">Status</p>
-          <p id="turn-indicator" class="turn-indicator">Start a game to begin.</p>
-          <p id="result-text" class="result-text">Choose the number of players and press start.</p>
+          <p id="turn-indicator" class="turn-indicator" aria-live="polite">Start a game to begin.</p>
+          <p id="result-text" class="result-text" aria-live="polite">Choose the number of players and press start.</p>
           <button id="restart-btn" class="secondary-btn" type="button" disabled>Restart</button>
         </div>
       </section>
 
-      <section class="players-card">
+      <section class="players-card" aria-label="Players overview">
         <div class="card-heading-row">
           <p class="panel-label">Players</p>
           <p class="small-note">Shared device multiplayer</p>
         </div>
-        <div id="players-list" class="players-list"></div>
+        <div id="players-list" class="players-list" aria-live="polite"></div>
       </section>
 
-      <section class="log-card">
+      <section class="log-card" aria-label="Move history">
         <div class="card-heading-row">
           <p class="panel-label">Move Log</p>
           <p class="small-note">Latest turn first</p>
@@ -82,7 +83,7 @@
           <p class="panel-label">Board</p>
           <p class="small-note">Exact roll needed to finish</p>
         </div>
-        <div id="board" class="board" aria-label="Snake and Ladders board"></div>
+        <div id="board" class="board" aria-label="Snake and Ladders board" role="grid"></div>
       </div>
     </section>
   </main>
