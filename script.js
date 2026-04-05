@@ -309,6 +309,17 @@ document.addEventListener("keydown", (event) => {
     return;
   }
 
+  const target = event.target;
+  if (
+    target instanceof HTMLElement &&
+    (target.tagName === "TEXTAREA" ||
+      target.tagName === "SELECT" ||
+      target.tagName === "INPUT" ||
+      target.isContentEditable)
+  ) {
+    return;
+  }
+
   if (event.key.toLowerCase() === "r" && !rollBtnEl.disabled) {
     movePlayer();
   }
