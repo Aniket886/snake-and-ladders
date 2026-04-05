@@ -42,6 +42,7 @@ const state = {
 const boardEl = document.getElementById("board");
 const setupFormEl = document.getElementById("setup-form");
 const playerCountEl = document.getElementById("player-count");
+const playerNamesEl = document.getElementById("player-names");
 const rollBtnEl = document.getElementById("roll-btn");
 const restartBtnEl = document.getElementById("restart-btn");
 const diceFaceEl = document.getElementById("dice-face");
@@ -93,17 +94,24 @@ function buildBoard() {
   }
 }
 
-function createPlayers(count) {
+function getRequestedNames() {
+  return playerNamesEl.value
+    .split(",")
+    .map((name) => name.trim())
+    .filter(Boolean);
+}
+
+function createPlayers(count, customNames = []) {
   return playerPalette.slice(0, count).map((player, index) => ({
     id: index + 1,
-    name: player.name,
+    name: customNames[index] || player.name,
     color: player.color,
     position: 0
   }));
 }
 
 function startGame(playerCount) {
-  state.players = createPlayers(playerCount);
+  state.players = createPlayers(playerCount, getRequestedNames());
   state.currentTurnIndex = 0;
   state.diceValue = null;
   state.winnerId = null;

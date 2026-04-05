@@ -35,7 +35,8 @@ body {
 }
 
 button,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -124,6 +125,28 @@ h1 {
   border: 1px solid var(--border);
   background: var(--panel-strong);
   color: var(--text);
+}
+
+.setup-card textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+  color: var(--text);
+  resize: vertical;
+  min-height: 96px;
+}
+
+.setup-card textarea::placeholder {
+  color: rgba(93, 106, 109, 0.9);
+}
+
+.setup-help {
+  margin: -4px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
 }
 
 .controls-card {
