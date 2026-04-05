@@ -22,9 +22,11 @@ This project recreates the classic Snake and Ladders board game with a cleaner i
 ## Features
 
 - 2 to 4 player local multiplayer
+- Optional custom player names
 - Exact roll required to finish on square 100
 - Generated 10x10 board with snake and ladder markers
 - Live dice result, turn indicator, and move log
+- Keyboard shortcut support for rolling
 - Restart flow without reloading the page
 - Responsive layout with a styled control panel and board
 
@@ -90,6 +92,12 @@ cd snake-and-ladders
 ```
 
 Open `index.html` in a browser, or launch the folder with a simple local server such as VS Code Live Server.
+
+## Controls
+
+- Click `Start New Game` to begin a fresh match
+- Click `Roll Dice` or press `R` to roll during an active game
+- Click `Restart` to reset the current match with the same player count
 
 ## Future Improvements
 
