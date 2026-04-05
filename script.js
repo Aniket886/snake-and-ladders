@@ -50,6 +50,7 @@ const turnIndicatorEl = document.getElementById("turn-indicator");
 const resultTextEl = document.getElementById("result-text");
 const playersListEl = document.getElementById("players-list");
 const moveLogEl = document.getElementById("move-log");
+let diceAnimationTimer = null;
 
 function buildBoard() {
   boardEl.innerHTML = "";
@@ -144,6 +145,17 @@ function addLogEntry(text) {
   }
 }
 
+function animateDice(roll) {
+  window.clearTimeout(diceAnimationTimer);
+  diceFaceEl.classList.remove("is-rolling");
+  void diceFaceEl.offsetWidth;
+  diceFaceEl.textContent = roll;
+  diceFaceEl.classList.add("is-rolling");
+  diceAnimationTimer = window.setTimeout(() => {
+    diceFaceEl.classList.remove("is-rolling");
+  }, 420);
+}
+
 function movePlayer() {
   if (state.gameStatus !== "playing") {
     return;
@@ -154,7 +166,7 @@ function movePlayer() {
   const attemptedPosition = player.position + roll;
 
   state.diceValue = roll;
-  diceFaceEl.textContent = roll;
+  animateDice(roll);
 
   if (attemptedPosition > 100) {
     addLogEntry(`${player.name} rolled ${roll} but needs an exact roll to finish.`);
@@ -292,6 +304,15 @@ setupFormEl.addEventListener("submit", (event) => {
 
 rollBtnEl.addEventListener("click", movePlayer);
 restartBtnEl.addEventListener("click", restartGame);
+document.addEventListener("keydown", (event) => {
+  if (event.repeat) {
+    return;
+  }
+
+  if (event.key.toLowerCase() === "r" && !rollBtnEl.disabled) {
+    movePlayer();
+  }
+});
 
 buildBoard();
 render();

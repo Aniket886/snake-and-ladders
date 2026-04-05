@@ -40,7 +40,7 @@
         <div class="dice-panel">
           <p class="panel-label">Dice</p>
           <div id="dice-face" class="dice-face" aria-live="polite">-</div>
-          <button id="roll-btn" class="primary-btn" type="button" disabled>Roll Dice</button>
+          <button id="roll-btn" class="primary-btn" type="button" disabled aria-keyshortcuts="R">Roll Dice</button>
         </div>
 
         <div class="status-panel">
@@ -66,6 +66,8 @@
         </div>
         <ol id="move-log" class="move-log" aria-live="polite"></ol>
       </section>
+
+      <p class="keyboard-note">Tip: press <kbd>R</kbd> to roll when a game is active.</p>
     </section>
 
     <section class="board-panel">

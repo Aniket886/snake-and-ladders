@@ -183,6 +183,10 @@ h1 {
   color: var(--highlight-dark);
 }
 
+.dice-face.is-rolling {
+  animation: dice-bounce 420ms ease;
+}
+
 .turn-indicator,
 .result-text {
   margin: 8px 0 0;
@@ -297,6 +301,26 @@ button:disabled {
   line-height: 1.45;
 }
 
+.keyboard-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.75em;
+  padding: 0.18rem 0.45rem;
+  border-radius: 8px;
+  border: 1px solid rgba(31, 42, 44, 0.12);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: inset 0 -1px 0 rgba(31, 42, 44, 0.08);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+}
+
 .board-panel {
   min-width: 0;
 }
@@ -383,6 +407,20 @@ button:disabled {
 
 .cell.finish {
   background: linear-gradient(135deg, #ffe48d 0%, #ffc857 100%);
+}
+
+@keyframes dice-bounce {
+  0% {
+    transform: scale(0.88) rotate(-8deg);
+  }
+
+  45% {
+    transform: scale(1.08) rotate(6deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 @media (max-width: 1100px) {
