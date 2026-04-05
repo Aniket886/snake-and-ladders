@@ -356,6 +356,32 @@ kbd {
   margin-bottom: 16px;
 }
 
+.board-legend {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.legend-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(31, 42, 44, 0.08);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.snake-chip {
+  color: var(--snake);
+}
+
+.ladder-chip {
+  color: var(--ladder);
+}
+
 .board {
   display: grid;
   grid-template-columns: repeat(10, minmax(0, 1fr));
