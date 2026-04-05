@@ -40,6 +40,7 @@ const state = {
 };
 
 const boardEl = document.getElementById("board");
+const boardOverlayEl = document.getElementById("board-overlay");
 const setupFormEl = document.getElementById("setup-form");
 const playerCountEl = document.getElementById("player-count");
 const playerNamesEl = document.getElementById("player-names");
@@ -52,6 +53,7 @@ const turnCountEl = document.getElementById("turn-count");
 const playersListEl = document.getElementById("players-list");
 const moveLogEl = document.getElementById("move-log");
 let diceAnimationTimer = null;
+let boardPathFrame = null;
 
 function buildBoard() {
   boardEl.innerHTML = "";
@@ -94,6 +96,155 @@ function buildBoard() {
       boardEl.appendChild(cellEl);
     });
   }
+
+  renderBoardPaths();
+}
+
+function getCellCenter(cellNumber) {
+  const cellEl = boardEl.querySelector(`[data-cell="${cellNumber}"]`);
+  if (!cellEl) {
+    return null;
+  }
+
+  const boardRect = boardEl.getBoundingClientRect();
+  const cellRect = cellEl.getBoundingClientRect();
+
+  return {
+    x: cellRect.left - boardRect.left + cellRect.width / 2,
+    y: cellRect.top - boardRect.top + cellRect.height / 2
+  };
+}
+
+function createSvgElement(tagName, attributes = {}) {
+  const element = document.createElementNS("http://www.w3.org/2000/svg", tagName);
+  Object.entries(attributes).forEach(([key, value]) => {
+    element.setAttribute(key, String(value));
+  });
+  return element;
+}
+
+function renderSnakePath(start, end) {
+  const dx = end.x - start.x;
+  const dy = end.y - start.y;
+  const distance = Math.hypot(dx, dy);
+  const normalX = distance === 0 ? 0 : -dy / distance;
+  const normalY = distance === 0 ? 0 : dx / distance;
+  const bend = Math.min(28, distance * 0.16);
+  const control1 = {
+    x: start.x + dx * 0.28 + normalX * bend,
+    y: start.y + dy * 0.28 + normalY * bend
+  };
+  const control2 = {
+    x: start.x + dx * 0.7 - normalX * bend,
+    y: start.y + dy * 0.7 - normalY * bend
+  };
+  const d = `M ${start.x} ${start.y} C ${control1.x} ${control1.y}, ${control2.x} ${control2.y}, ${end.x} ${end.y}`;
+
+  boardOverlayEl.appendChild(createSvgElement("path", {
+    class: "snake-path",
+    d
+  }));
+
+  boardOverlayEl.appendChild(createSvgElement("circle", {
+    class: "path-cap",
+    cx: start.x,
+    cy: start.y,
+    r: 4
+  }));
+
+  boardOverlayEl.appendChild(createSvgElement("circle", {
+    class: "path-cap",
+    cx: end.x,
+    cy: end.y,
+    r: 4
+  }));
+}
+
+function renderLadderPath(start, end) {
+  const dx = end.x - start.x;
+  const dy = end.y - start.y;
+  const distance = Math.hypot(dx, dy);
+  if (distance === 0) {
+    return;
+  }
+
+  const normalX = -dy / distance;
+  const normalY = dx / distance;
+  const railOffset = 8;
+  const rail1Start = { x: start.x + normalX * railOffset, y: start.y + normalY * railOffset };
+  const rail1End = { x: end.x + normalX * railOffset, y: end.y + normalY * railOffset };
+  const rail2Start = { x: start.x - normalX * railOffset, y: start.y - normalY * railOffset };
+  const rail2End = { x: end.x - normalX * railOffset, y: end.y - normalY * railOffset };
+
+  boardOverlayEl.appendChild(createSvgElement("line", {
+    class: "ladder-rail",
+    x1: rail1Start.x,
+    y1: rail1Start.y,
+    x2: rail1End.x,
+    y2: rail1End.y
+  }));
+
+  boardOverlayEl.appendChild(createSvgElement("line", {
+    class: "ladder-rail",
+    x1: rail2Start.x,
+    y1: rail2Start.y,
+    x2: rail2End.x,
+    y2: rail2End.y
+  }));
+
+  const rungCount = Math.max(3, Math.floor(distance / 42));
+  for (let index = 0; index <= rungCount; index += 1) {
+    const t = index / rungCount;
+    const rungCenter = {
+      x: start.x + dx * t,
+      y: start.y + dy * t
+    };
+
+    boardOverlayEl.appendChild(createSvgElement("line", {
+      class: "ladder-rung",
+      x1: rungCenter.x + normalX * railOffset,
+      y1: rungCenter.y + normalY * railOffset,
+      x2: rungCenter.x - normalX * railOffset,
+      y2: rungCenter.y - normalY * railOffset
+    }));
+  }
+}
+
+function renderBoardPaths() {
+  if (!boardOverlayEl) {
+    return;
+  }
+
+  boardOverlayEl.innerHTML = "";
+  const boardWidth = boardEl.clientWidth;
+  const boardHeight = boardEl.clientHeight;
+
+  if (!boardWidth || !boardHeight) {
+    return;
+  }
+
+  boardOverlayEl.setAttribute("viewBox", `0 0 ${boardWidth} ${boardHeight}`);
+
+  Object.entries(ladders).forEach(([startCell, endCell]) => {
+    const start = getCellCenter(Number(startCell));
+    const end = getCellCenter(Number(endCell));
+    if (start && end) {
+      renderLadderPath(start, end);
+    }
+  });
+
+  Object.entries(snakes).forEach(([startCell, endCell]) => {
+    const start = getCellCenter(Number(startCell));
+    const end = getCellCenter(Number(endCell));
+    if (start && end) {
+      renderSnakePath(start, end);
+    }
+  });
+}
+
+function scheduleBoardPathRender() {
+  window.cancelAnimationFrame(boardPathFrame);
+  boardPathFrame = window.requestAnimationFrame(renderBoardPaths);
 }
 
 function getRequestedNames() {
@@ -318,6 +469,7 @@ function render() {
   renderMoveLog();
   renderStatusMeta();
   renderRollButtonLabel();
+  scheduleBoardPathRender();
 }
 
 setupFormEl.addEventListener("submit", (event) => {
@@ -347,6 +499,8 @@ document.addEventListener("keydown", (event) => {
     movePlayer();
   }
 });
+
+window.addEventListener("resize", scheduleBoardPathRender);
 
 buildBoard();
 render();

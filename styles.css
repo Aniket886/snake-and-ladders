@@ -371,6 +371,10 @@ kbd {
   margin-bottom: 14px;
 }
 
+.board-wrap {
+  position: relative;
+}
+
 .legend-chip {
   display: inline-flex;
   align-items: center;
@@ -392,6 +396,8 @@ kbd {
 }
 
 .board {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(10, minmax(0, 1fr));
   gap: 6px;
@@ -402,8 +408,48 @@ kbd {
     rgba(255, 255, 255, 0.36);
 }
 
+.board-overlay {
+  position: absolute;
+  inset: 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.board-overlay line,
+.board-overlay path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.board-overlay .snake-path {
+  stroke: var(--snake);
+  stroke-width: 7;
+  filter: drop-shadow(0 3px 8px rgba(200, 76, 95, 0.24));
+}
+
+.board-overlay .ladder-rail {
+  stroke: var(--ladder);
+  stroke-width: 5;
+  filter: drop-shadow(0 3px 8px rgba(61, 147, 99, 0.24));
+}
+
+.board-overlay .ladder-rung {
+  stroke: rgba(61, 147, 99, 0.78);
+  stroke-width: 3;
+}
+
+.board-overlay .path-cap {
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 2;
+}
+
 .cell {
   position: relative;
+  z-index: 2;
   min-height: clamp(56px, 7.5vw, 88px);
   padding: 8px;
   border-radius: 16px;
@@ -412,11 +458,11 @@ kbd {
 }
 
 .cell.light {
-  background: var(--board-light);
+  background: rgba(248, 241, 220, 0.82);
 }
 
 .cell.dark {
-  background: var(--board-dark);
+  background: rgba(225, 240, 217, 0.82);
 }
 
 .cell-number {
@@ -460,7 +506,7 @@ kbd {
 }
 
 .cell.finish {
-  background: linear-gradient(135deg, #ffe48d 0%, #ffc857 100%);
+  background: linear-gradient(135deg, rgba(255, 228, 141, 0.9) 0%, rgba(255, 200, 87, 0.9) 100%);
 }
 
 @keyframes dice-bounce {
@@ -520,6 +566,12 @@ kbd {
   .board {
     gap: 4px;
     padding: 4px;
+  }
+
+  .board-overlay {
+    inset: 4px;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
   }
 
   .cell {

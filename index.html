@@ -88,7 +88,16 @@
           <span class="legend-chip snake-chip">Snake</span>
           <span class="legend-chip ladder-chip">Ladder</span>
         </div>
-        <div id="board" class="board" aria-label="Snake and Ladders board" role="grid"></div>
+        <div class="board-wrap">
+          <svg
+            id="board-overlay"
+            class="board-overlay"
+            aria-hidden="true"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          ></svg>
+          <div id="board" class="board" aria-label="Snake and Ladders board" role="grid"></div>
+        </div>
       </div>
     </section>
   </main>
