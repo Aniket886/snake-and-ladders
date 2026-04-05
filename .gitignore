@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.vscode/
+.idea/
+
+dist/
+build/
+coverage/
+
+*.log
