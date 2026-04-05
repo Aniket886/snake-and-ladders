@@ -234,6 +234,13 @@ button:hover:not(:disabled) {
   transform: translateY(-1px);
 }
 
+button:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(219, 107, 45, 0.28);
+  outline-offset: 3px;
+}
+
 button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
