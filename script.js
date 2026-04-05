@@ -140,7 +140,8 @@ function getCurrentPlayer() {
 }
 
 function addLogEntry(text) {
-  state.moveLog.unshift(text);
+  const turnNumber = state.moveLog.length + 1;
+  state.moveLog.unshift(`Turn ${turnNumber}: ${text}`);
   if (state.moveLog.length > 12) {
     state.moveLog.pop();
   }
