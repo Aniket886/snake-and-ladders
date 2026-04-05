@@ -289,6 +289,7 @@ function renderBoardTokens() {
     tokenEl.className = "token";
     tokenEl.style.backgroundColor = player.color;
     tokenEl.title = `${player.name} on square ${player.position}`;
+    tokenEl.setAttribute("aria-label", `${player.name} on square ${player.position}`);
     cellEl.appendChild(tokenEl);
   });
 }
