@@ -48,6 +48,7 @@ const restartBtnEl = document.getElementById("restart-btn");
 const diceFaceEl = document.getElementById("dice-face");
 const turnIndicatorEl = document.getElementById("turn-indicator");
 const resultTextEl = document.getElementById("result-text");
+const turnCountEl = document.getElementById("turn-count");
 const playersListEl = document.getElementById("players-list");
 const moveLogEl = document.getElementById("move-log");
 let diceAnimationTimer = null;
@@ -143,6 +144,10 @@ function addLogEntry(text) {
   if (state.moveLog.length > 12) {
     state.moveLog.pop();
   }
+}
+
+function renderStatusMeta() {
+  turnCountEl.textContent = `Turns played: ${state.moveLog.length}`;
 }
 
 function animateDice(roll) {
@@ -299,6 +304,7 @@ function render() {
   renderPlayers();
   renderBoardTokens();
   renderMoveLog();
+  renderStatusMeta();
 }
 
 setupFormEl.addEventListener("submit", (event) => {
