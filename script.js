@@ -99,7 +99,7 @@ function buildBoard() {
 function getRequestedNames() {
   return playerNamesEl.value
     .split(",")
-    .map((name) => name.trim())
+    .map((name) => name.trim().replace(/\s+/g, " ").slice(0, 18))
     .filter(Boolean);
 }
 
