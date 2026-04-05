@@ -151,6 +151,15 @@ function renderStatusMeta() {
   turnCountEl.textContent = `Turns played: ${state.moveLog.length}`;
 }
 
+function renderRollButtonLabel() {
+  if (state.gameStatus !== "playing") {
+    rollBtnEl.textContent = "Roll Dice";
+    return;
+  }
+
+  rollBtnEl.textContent = `Roll for ${getCurrentPlayer().name}`;
+}
+
 function animateDice(roll) {
   window.clearTimeout(diceAnimationTimer);
   diceFaceEl.classList.remove("is-rolling");
@@ -307,6 +316,7 @@ function render() {
   renderBoardTokens();
   renderMoveLog();
   renderStatusMeta();
+  renderRollButtonLabel();
 }
 
 setupFormEl.addEventListener("submit", (event) => {
