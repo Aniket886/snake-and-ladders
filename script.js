@@ -232,6 +232,10 @@ function renderPlayers() {
       cardEl.classList.add("active");
     }
 
+    if (state.gameStatus === "won" && player.id === state.winnerId) {
+      cardEl.classList.add("winner");
+    }
+
     const badgeEl = document.createElement("span");
     badgeEl.className = "player-badge";
     badgeEl.style.backgroundColor = player.color;

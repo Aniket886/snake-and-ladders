@@ -267,6 +267,12 @@ button:disabled {
   background: rgba(255, 246, 238, 0.92);
 }
 
+.player-card.winner {
+  background: linear-gradient(135deg, rgba(255, 245, 207, 0.95), rgba(255, 229, 163, 0.9));
+  border-color: rgba(212, 150, 37, 0.28);
+  box-shadow: 0 10px 24px rgba(212, 150, 37, 0.16);
+}
+
 .player-badge {
   width: 16px;
   height: 16px;
