@@ -304,6 +304,15 @@ button:disabled {
   font-size: 0.9rem;
 }
 
+.empty-state {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.56);
+  border: 1px dashed rgba(31, 42, 44, 0.14);
+  color: var(--muted);
+}
+
 .move-log {
   list-style: decimal;
   margin: 0;

@@ -224,7 +224,7 @@ function renderPlayers() {
 
   if (state.players.length === 0) {
     const emptyEl = document.createElement("p");
-    emptyEl.className = "player-position";
+    emptyEl.className = "empty-state";
     emptyEl.textContent = "No players yet. Start a new game to populate the board.";
     playersListEl.appendChild(emptyEl);
     return;
@@ -289,6 +289,7 @@ function renderMoveLog() {
 
   if (state.moveLog.length === 0) {
     const itemEl = document.createElement("li");
+    itemEl.className = "empty-state";
     itemEl.textContent = "No moves yet.";
     moveLogEl.appendChild(itemEl);
     return;
