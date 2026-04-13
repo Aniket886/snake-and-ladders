@@ -5,19 +5,27 @@
 </p>
 
 <p align="center">
-  A modern browser-based Snake and Ladders game built with HTML, CSS, and vanilla JavaScript.
+  A polished browser-based Snake and Ladders game with local multiplayer, custom player names, keyboard shortcuts, and a responsive board built with HTML, CSS, and vanilla JavaScript.
 </p>
 
 <p align="center">
   <a href="https://github.com/Aniket886/snake-and-ladders">Repository</a> •
   <a href="#features">Features</a> •
-  <a href="#rules">Rules</a> •
+  <a href="#how-to-play">How to Play</a> •
   <a href="#run-locally">Run Locally</a>
 </p>
 
 ## Overview
 
-This project recreates the classic Snake and Ladders board game with a cleaner interface and shared-device multiplayer. The board is generated in JavaScript, the player turns are tracked live, and the layout is responsive enough to work on both desktop and mobile screens.
+This project recreates the classic Snake and Ladders board game with a cleaner interface and shared-device multiplayer. The board is generated in JavaScript, player turns are tracked live, and the layout stays usable on both desktop and mobile screens.
+
+## Why This Project Stands Out
+
+- Clean setup flow for 2 to 4 players
+- Optional custom player names for shared-device matches
+- Live dice feedback, turn indicator, and move log
+- Responsive layout that works on desktop and mobile
+- Zero build step: clone it and play
 
 ## Features
 
@@ -30,14 +38,15 @@ This project recreates the classic Snake and Ladders board game with a cleaner i
 - Restart flow without reloading the page
 - Responsive layout with a styled control panel and board
 
-## Rules
+## How to Play
 
 1. Select the number of players and start a new game.
-2. Players take turns rolling the dice.
-3. Landing on a ladder moves the player up.
-4. Landing on a snake moves the player down.
-5. A player must roll the exact number needed to reach square 100.
-6. If the roll overshoots 100, the token stays in place.
+2. Add player names if you want a custom match setup.
+3. Players take turns rolling the dice.
+4. Landing on a ladder moves the player up.
+5. Landing on a snake moves the player down.
+6. A player must roll the exact number needed to reach square 100.
+7. If the roll overshoots 100, the token stays in place.
 
 ## Tech Stack
 
@@ -77,11 +86,11 @@ This project recreates the classic Snake and Ladders board game with a cleaner i
 
 ```text
 Snake n Ladders/
-├── index.html
-├── styles.css
-├── script.js
-├── ss1.png
-└── README.md
+|-- index.html
+|-- styles.css
+|-- script.js
+|-- ss1.png
+`-- README.md
 ```
 
 ## Run Locally
@@ -93,6 +102,14 @@ cd snake-and-ladders
 
 Open `index.html` in a browser, or launch the folder with a simple local server such as VS Code Live Server.
 
+## Quick Play Checklist
+
+1. Start a game with 2, 3, or 4 players.
+2. Optionally enter player names separated by commas.
+3. Click `Roll Dice` or press `R`.
+4. Watch the move log update after every turn.
+5. Use `Restart` to reset the match without reloading the page.
+
 ## Controls
 
 - Click `Start New Game` to begin a fresh match
@@ -101,7 +118,6 @@ Open `index.html` in a browser, or launch the folder with a simple local server 
 
 ## Future Improvements
 
-- Add custom player names
 - Add dice roll animation
 - Add sound effects toggle
 - Add a single-player mode
